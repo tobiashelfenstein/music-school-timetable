@@ -9,4 +9,5 @@ return function(App $app) {
     $app->post('/login', \App\Module\Login\Action\LoginSubmitAction::class)->setName('login-submit');
 
     $app->get('/dashboard', \App\Module\Dashboard\Action\DashboardPageAction::class)->setName('dashboard');
+    $app->get('/timetable', \App\Module\Timetable\ListPage\Action\TimetableListPageAction::class)->setName('timetable');
 };

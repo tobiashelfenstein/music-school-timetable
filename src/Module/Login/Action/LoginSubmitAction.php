@@ -39,10 +39,10 @@ final class LoginSubmitAction {
             }
         }
 
-        //unset($_SESSION['user']);
+        unset($_SESSION['user']);
 
-        //$url = $routeParser->urlFor('home');
+        $url = $routeParser->urlFor('home');
 
-        //return $redirectResponse->withHeader('Location', $url)->withStatus(302);
+        return $redirectResponse->withHeader('Location', $url)->withStatus(302);
     }
 }
