@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Module\Login\Action;
+namespace App\Application\Actions\Login;
 
-use PDO;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\PhpRenderer;
-
-use App\Domain\User\User;
 use Slim\Routing\RouteContext;
+use App\Domain\User\UserRepository;
 
-final class LoginSubmitAction {
-    private $model;
 
-    public function __construct(PDO $pdo) {
-        $this->model = new User($pdo);
+class SubmitLoginAction {
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
@@ -23,7 +22,7 @@ final class LoginSubmitAction {
         $username = $loginParams['username'];
         $password = $loginParams['password'];
 
-        $loginData = $this->model->getByLogin($username);
+        $loginData = $this->userRepository->getByLogin($username);
 
         $routeContext = RouteContext::fromRequest($request);
         $routeParser = $routeContext->getRouteParser();

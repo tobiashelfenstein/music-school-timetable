@@ -3,13 +3,21 @@
 use Slim\App;
 use Psr\Container\ContainerInterface;
 use Slim\Factory\AppFactory;
-use App\Infrastructure\Settings\Settings;
+use App\Application\Settings\Settings;
+
+use App\Domain\User\UserRepository;
+use App\Infrastructure\Persistence\User\MySQLUserRepository;
 
 return [
     // load application settings
     'settings' => function() {
         return require __DIR__ . '/settings.php';
     },
+
+    // set up repositories
+    //'repositories' => function() {
+    //    return require __DIR__ . '/repositories.php';
+    //},
 
     // instance of the main app
     App::class => function(ContainerInterface $container) {

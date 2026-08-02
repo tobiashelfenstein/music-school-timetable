@@ -2,18 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Infrastructure\Persistence\User;
 
-class User
+use PDO;
+use App\Domain\User\UserRepository;
+
+class MySQLUserRepository implements UserRepository
 {
     private $table = "user";
     protected $db;
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct(PDO $pdo)
+    {
+        $this->db = $pdo;
     }
 
-    public function getById($id) {
+    public function getById(int $id): mixed
+    {
         $sql = $this->db->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
         $sql->bindParam(':id', $id);
         $sql->execute();
@@ -21,7 +26,8 @@ class User
         return $sql->fetch();
     }
 
-    public function getByLogin($login) {
+    public function getByLogin(string $login): mixed
+    {
         $sql = $this->db->prepare("SELECT * FROM " . $this->table . " WHERE LOWER(username) = LOWER(:username)");
         $sql->bindParam(':username', $login);
         $sql->execute();
