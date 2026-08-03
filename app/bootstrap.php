@@ -5,8 +5,8 @@ use Slim\App;
 
 use App\Domain\User\UserRepository;
 use App\Infrastructure\Persistence\User\MySQLUserRepository;
-use App\Domain\Timetable\TimetableRepository;
-use App\Infrastructure\Persistence\Timetable\MySQLTimetableRepository;
+use App\Domain\Unit\UnitRepository;
+use App\Infrastructure\Persistence\Unit\MySQLUnitRepository;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -18,7 +18,7 @@ $containerBuilder->addDefinitions([
 ]);
 
 $containerBuilder->addDefinitions([
-    TimetableRepository::class => \DI\autowire(MySQLTimetableRepository::class),
+    UnitRepository::class => \DI\autowire(MySQLUnitRepository::class),
 ]);
 
 $container = $containerBuilder->build();

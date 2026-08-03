@@ -9,20 +9,23 @@ use Slim\Views\PhpRenderer;
 use Slim\Routing\RouteContext;
 use App\Domain\Unit\UnitRepository;
 
-class ViewTimetableAction {
-    private UnitRepository $unitRepository;
+class EditTimetableAction {
+    private UnitRepository $uniteRepository;
 
     public function __construct(UnitRepository $unitRepository) {
         $this->unitRepository = $unitRepository;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+        $unitId = $request->getAttribute('id');
+    
+    
         $viewData = [
-            'units' => $this->unitRepository->getAll(),
+            'unitId' => $unitId,
         ];
 
         $renderer = new PhpRenderer(__DIR__ . '/../../../../templates');
 
-        return $renderer->render($response, 'timetable/view.html.php', $viewData);
+        return $renderer->render($response, 'timetable/edit.html.php', $viewData);
     }
 }

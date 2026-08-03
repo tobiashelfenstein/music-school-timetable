@@ -9,7 +9,7 @@ use Slim\Views\PhpRenderer;
 use Slim\Routing\RouteContext;
 use App\Domain\Unit\UnitRepository;
 
-class ViewTimetableAction {
+class DeleteTimetableAction {
     private UnitRepository $unitRepository;
 
     public function __construct(UnitRepository $unitRepository) {
@@ -17,12 +17,15 @@ class ViewTimetableAction {
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+        $unitId = $request->getAttribute('id');
+    
+    
         $viewData = [
-            'units' => $this->unitRepository->getAll(),
+            'unitId' => $unitId,
         ];
 
         $renderer = new PhpRenderer(__DIR__ . '/../../../../templates');
 
-        return $renderer->render($response, 'timetable/view.html.php', $viewData);
+        return $renderer->render($response, 'timetable/delete.html.php', $viewData);
     }
 }
