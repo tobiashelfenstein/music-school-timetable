@@ -17,6 +17,8 @@ return function(App $app) {
 
     $app->get('/dashboard', ViewDashboardAction::class)->setName('dashboard');
 
+    // https://samuel-gfeller.ch/docs/Slim-Routing
+    // https://github.com/samuelgfeller/slim-example-project/blob/master/config/routes.php
     $app->group('/timetable', function(Group $group) {
         $group->get('', ViewTimetableAction::class)->setName('timetable');
         $group->get('/unit/{id:\d+}/edit', EditTimetableAction::class)->setName('timetable-unit-edit');

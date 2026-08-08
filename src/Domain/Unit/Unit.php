@@ -7,16 +7,21 @@ namespace App\Domain\Unit;
 
 class Unit
 {
-    private ?int $id;
+    private ?int $unit;
     private string $begin;
     private string $end;
-    private int $type;
+    private string $type;
     private string $student;
+    private ?string $d0 = "";
+    private ?string $d1 = "";
+    private ?string $d2 = "";
+    private ?string $d3 = "";
+    private ?string $d4 = "";
     private string $comment = "";
 
-    /*public function __construct(?int $id, string $begin, string $end, int $type, string $student, string $comment)
+    /*public function __construct(?int $unit, string $begin, string $end, int $type, string $student, string $comment)
     {
-        $this->id = $id;
+        $this->id = $unit;
         $this->begin = $begin;
         $this->end = $end;
         $this->type = $type;
@@ -31,7 +36,7 @@ class Unit
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->unit;
     }
 
     public function getBegin(): string
@@ -44,7 +49,7 @@ class Unit
         return $this->end;
     }
 
-    public function getType(): int
+    public function getType(): string
     {
         return $this->type;
     }
@@ -57,5 +62,10 @@ class Unit
     public function getComment(): string
     {
         return $this->comment;
+    }
+
+    public function getDayAttendance(): array
+    {
+        return array($this->d0, $this->d1, $this->d2, $this->d3, $this->d4);
     }
 }
